@@ -42,7 +42,7 @@ class PageViewCard extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        200.h,
+        150.h,
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:camping/screens/common/text_widget.dart';
 import 'package:camping/screens/onboarding/widgets/page_view_card.dart';
 import 'package:camping/screens/onboarding/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -16,6 +17,8 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   final _controller = PageController();
+
+  int currentPage = 0;
 
   static const _kDuration = Duration(milliseconds: 300);
 
@@ -60,41 +63,103 @@ class _OnboardingPageState extends State<OnboardingPage> {
               itemCount: 4,
               controller: _controller,
               itemBuilder: (BuildContext context, int index) {
+                currentPage = index;
                 return _pages[index % _pages.length];
               },
             ),
           ),
-          SmoothPageIndicator(
-            controller: _controller,
-            count: 4,
-            axisDirection: Axis.horizontal,
-            effect: const SlideEffect(
-              type: SlideType.slideUnder,
-              spacing: 12.0,
-              radius: 50.0,
-              dotWidth: 8.0,
-              dotHeight: 8.0,
-              // paintStyle:  PaintingStyle.stroke,
-              strokeWidth: 1.5,
-              dotColor: AppColors.grey_100,
-              activeDotColor: AppColors.green_500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                currentPage == 0
+                    ? Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        height: 40,
+                        width: 40,
+                      )
+                    : Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.green_100,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            onTap: () {
+                              _controller.previousPage(
+                                  duration: _kDuration, curve: _kCurve);
+                              currentPage--;
+                              setState(() {});
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset(AppIcons.arrowLeft),
+                            ),
+                          ),
+                        ),
+                      ),
+                SmoothPageIndicator(
+                  controller: _controller,
+                  count: 4,
+                  axisDirection: Axis.horizontal,
+                  effect: const SlideEffect(
+                    type: SlideType.slideUnder,
+                    spacing: 12.0,
+                    radius: 50.0,
+                    dotWidth: 8.0,
+                    dotHeight: 8.0,
+                    // paintStyle:  PaintingStyle.stroke,
+                    strokeWidth: 1.5,
+                    dotColor: AppColors.grey_100,
+                    activeDotColor: AppColors.green_500,
+                  ),
+                ),
+                currentPage == 3
+                    ? Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        height: 40,
+                        width: 40,
+                      )
+                    : Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.green_900,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            onTap: () {
+                              _controller.nextPage(
+                                  duration: _kDuration, curve: _kCurve);
+                              currentPage++;
+                              setState(() {});
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset(AppIcons.arrowRight),
+                            ),
+                          ),
+                        ),
+                      )
+              ],
             ),
           ),
           36.h,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SubmitButton(
-                controller: _controller,
-                onTap: () {
-                  int page =
-                      _controller.page?.round() ?? _controller.initialPage;
-                  if (page < 3) {
-                    _controller.animateToPage(page + 1,
-                        duration: _kDuration, curve: _kCurve);
-                  } else {
-                    // navigator.pushReplacementNamed(RouteList.signIn);
-                  }
-                }),
+            child: SubmitButton(controller: _controller, onTap: () {}),
           ),
           16.h,
           Row(
