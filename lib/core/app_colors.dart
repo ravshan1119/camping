@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class AppColors {
   ///base color
   static const Color black = Color(0xFF000000);
-  static const Color white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xFF3F3F3F);
+
+  ///background color
+  static const Color scaffoldColor = Color(0xFFFFFFFF);
 
   ///primary color
   static const Color green_50 = Color(0xFFF7FEE7);
@@ -34,3 +37,21 @@ class AppColors {
 
   static const Color info = Color(0xFFFAD202);
 }
+
+const MaterialColor primaryColor = MaterialColor(
+  _bluePrimaryValue,
+  <int, Color>{
+    50: Color.fromRGBO(65, 110, 177, .1),
+    100: Color.fromRGBO(65, 110, 177, .2),
+    200: Color.fromRGBO(65, 110, 177, .3),
+    300: Color.fromRGBO(65, 110, 177, .4),
+    400: Color.fromRGBO(65, 110, 177, .5),
+    500: Color.fromRGBO(65, 110, 177, .6),
+    600: Color.fromRGBO(65, 110, 177, .7),
+    700: Color.fromRGBO(65, 110, 177, .8),
+    800: Color.fromRGBO(65, 110, 177, .9),
+    900: Color.fromRGBO(65, 110, 177, 1),
+  },
+);
+const int _bluePrimaryValue = 0xFF416EB1;
+
