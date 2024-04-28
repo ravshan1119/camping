@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_b_44_2504)">
+        <rect width="32" height="32" rx="8" fill="black" fill-opacity="0.5"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4381 25.3332C18.0487 25.3332 17.662 25.1639 17.398 24.8359L10.9607 16.8359C10.5634 16.3412 10.5687 15.6346 10.9754 15.1466L17.6421 7.14656C18.1127 6.58123 18.954 6.50523 19.5207 6.9759C20.086 7.44656 20.1621 8.2879 19.6901 8.85323L13.7234 16.0146L19.4767 23.1639C19.938 23.7372 19.8474 24.5772 19.2727 25.0386C19.0274 25.2372 18.7314 25.3332 18.4381 25.3332" fill="white"/>
+        <mask id="mask0_44_2504" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="10" y="6" width="10" height="20">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4381 25.3332C18.0487 25.3332 17.662 25.1639 17.398 24.8359L10.9607 16.8359C10.5634 16.3412 10.5687 15.6346 10.9754 15.1466L17.6421 7.14656C18.1127 6.58123 18.954 6.50523 19.5207 6.9759C20.086 7.44656 20.1621 8.2879 19.6901 8.85323L13.7234 16.0146L19.4767 23.1639C19.938 23.7372 19.8474 24.5772 19.2727 25.0386C19.0274 25.2372 18.7314 25.3332 18.4381 25.3332" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_44_2504)">
+            <rect width="32" height="32" fill="white"/>
+        </g>
+    </g>
+    <defs>
+        <filter id="filter0_b_44_2504" x="-3" y="-3" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feGaussianBlur in="BackgroundImageFix" stdDeviation="1.5"/>
+            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_44_2504"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_44_2504" result="shape"/>
+        </filter>
+    </defs>
+</svg>
