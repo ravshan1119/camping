@@ -1,3 +1,4 @@
+import 'package:camping/screens/add_trip/add_trip_page.dart';
 import 'package:camping/screens/auth/auth_page.dart';
 import 'package:camping/screens/auth/login/login_page.dart';
 import 'package:camping/screens/auth/register/register_page.dart';
@@ -13,5 +14,6 @@ class Routes {
         RouteList.login: (context) => const LoginPage(),
         RouteList.register: (context) => const RegisterPage(),
         RouteList.auth: (context) => const AuthPage(),
+        RouteList.addTrip: (context) => const AddTripPage(),
       };
 }

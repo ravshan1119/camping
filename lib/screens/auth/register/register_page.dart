@@ -1,6 +1,8 @@
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
 import 'package:camping/core/extension.dart';
+import 'package:camping/core/route/navigator.dart';
+import 'package:camping/core/route/routes_const.dart';
 import 'package:camping/screens/auth/bloc/auth_bloc.dart';
 import 'package:camping/screens/common/loader.dart';
 import 'package:camping/screens/common/my_elevated_button.dart';
@@ -112,7 +114,9 @@ class _RegisterPageState extends State<RegisterPage> {
               MyElevatedButton(
                 expanded: true,
                 radius: 12,
-                onTap: () {},
+                onTap: () {
+                  navigator.pushNamed(RouteList.addTrip);
+                },
                 primaryColor: AppColors.green_500,
                 child: state.isLoading
                     ? const Center(
