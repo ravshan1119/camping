@@ -181,7 +181,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 child: SubmitButton(
                     controller: _controller,
                     onTap: () {
-                      navigator.pushNamed(RouteList.login);
+                      context
+                          .read<AuthBloc>()
+                          .add(const CurrentPageChangedEvent(page: 0));
+
+                      navigator.pushNamed(RouteList.auth);
                     }),
               ),
               16.h,
@@ -195,6 +199,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       fontSize: 14),
                   TextButton(
                     onPressed: () {
+                      context
+                          .read<AuthBloc>()
+                          .add(const CurrentPageChangedEvent(page: 1));
                       navigator.pushReplacementNamed(RouteList.auth);
                     },
                     child: const TextWidget(
