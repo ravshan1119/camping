@@ -71,6 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     textInputType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     controller: _emailController,
+                    error: state.errorEmail,
                     onChanged: (v) {
                       context
                           .read<AuthBloc>()
@@ -110,6 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     textInputAction: TextInputAction.done,
                     obscureText: true,
                     controller: _passwordController,
+                    error: state.errorPassword,
                     onChanged: (v) {
                       context
                           .read<AuthBloc>()

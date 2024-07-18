@@ -52,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   textInputType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   controller: _emailController,
+                  error: state.errorEmail,
                   onChanged: (v) {
                     context.read<AuthBloc>().add(LoginChangedEvent(email: v));
                   },
@@ -70,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   textInputAction: TextInputAction.done,
                   obscureText: true,
                   controller: _passwordController,
+                  error: state.errorPassword,
                   onChanged: (v) {
                     context.read<AuthBloc>().add(LoginChangedEvent(password: v));
                   },
@@ -90,7 +92,9 @@ class _LoginPageState extends State<LoginPage> {
                   expanded: true,
                   radius: 12,
                   onTap: () {
-                    navigator.pushNamed(RouteList.addTrip);
+                    context
+                        .read<AuthBloc>()
+                        .add(LoginEvent());
                   },
                   primaryColor: AppColors.green_500,
                   child: state.isLoading
