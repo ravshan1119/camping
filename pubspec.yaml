@@ -28,6 +28,7 @@ dependencies:
     git:
       url: https://github.com/Azamat0411/alice.git
   connectivity_plus: ^5.0.2
+  firebase_auth: ^5.1.2
 
 dev_dependencies:
   hive_generator:

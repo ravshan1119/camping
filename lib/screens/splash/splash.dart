@@ -4,6 +4,8 @@ import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/core/route/routes_const.dart';
+import 'package:camping/data/injection.dart';
+import 'package:camping/data/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,7 +18,13 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   _nextPage() {
     Timer(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacementNamed(RouteList.onboarding);
+      String token = getIt<LocalStorage>().getToken();
+
+      if (token.isEmpty) {
+        Navigator.of(context).pushReplacementNamed(RouteList.onboarding);
+      } else {
+        Navigator.of(context).pushReplacementNamed(RouteList.addTrip);
+      }
     });
   }
 

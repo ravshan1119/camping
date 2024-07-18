@@ -31,96 +31,100 @@ class _LoginPageState extends State<LoginPage> {
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(AppIcons.logo2),
-              40.h,
-              const TextWidget(
-                  text: "Email",
-                  textColor: AppColors.grey_500,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
-              8.h,
-              MyTextFormField(
-                fillColor: AppColors.grey_50,
-                radius: 12,
-                textInputType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                controller: _emailController,
-                onChanged: (v) {
-                  context.read<AuthBloc>().add(LoginChangedEvent(email: v));
-                },
-              ),
-              20.h,
-              const TextWidget(
-                  text: "Password",
-                  textColor: AppColors.grey_500,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16),
-              8.h,
-              MyTextFormField(
-                fillColor: AppColors.grey_50,
-                radius: 12,
-                textInputType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-                obscureText: true,
-                controller: _passwordController,
-                onChanged: (v) {
-                  context.read<AuthBloc>().add(LoginChangedEvent(password: v));
-                },
-              ),
-              10.h,
-              Center(
-                child: TextButton(
-                  onPressed: () {},
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                100.h,
+                Image.asset(AppIcons.logo2),
+                40.h,
+                const TextWidget(
+                    text: "Email",
+                    textColor: AppColors.grey_500,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16),
+                8.h,
+                MyTextFormField(
+                  fillColor: AppColors.grey_50,
+                  radius: 12,
+                  textInputType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  controller: _emailController,
+                  onChanged: (v) {
+                    context.read<AuthBloc>().add(LoginChangedEvent(email: v));
+                  },
+                ),
+                20.h,
+                const TextWidget(
+                    text: "Password",
+                    textColor: AppColors.grey_500,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16),
+                8.h,
+                MyTextFormField(
+                  fillColor: AppColors.grey_50,
+                  radius: 12,
+                  textInputType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
+                  obscureText: true,
+                  controller: _passwordController,
+                  onChanged: (v) {
+                    context.read<AuthBloc>().add(LoginChangedEvent(password: v));
+                  },
+                ),
+                10.h,
+                Center(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const TextWidget(
+                        text: "Forgot Password?",
+                        textColor: AppColors.grey_400,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16),
+                  ),
+                ),
+                24.h,
+                MyElevatedButton(
+                  expanded: true,
+                  radius: 12,
+                  onTap: () {
+                    navigator.pushNamed(RouteList.addTrip);
+                  },
+                  primaryColor: AppColors.green_500,
+                  child: state.isLoading
+                      ? const Center(
+                          child: Loader(
+                            color: AppColors.white,
+                          ),
+                        )
+                      : const TextWidget(
+                          text: "Log In",
+                          textColor: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16),
+                ),
+                20.h,
+                MyElevatedButton(
+                  expanded: true,
+                  radius: 12,
+                  elevation: 0,
+                  onTap: () {
+                    context
+                        .read<AuthBloc>()
+                        .add(const CurrentPageChangedEvent(page: 1));
+                  },
+                  primaryColor: Colors.white,
+                  borderColor: AppColors.green_500,
                   child: const TextWidget(
-                      text: "Forgot Password?",
-                      textColor: AppColors.grey_400,
-                      fontWeight: FontWeight.w400,
+                      text: "Register",
+                      textColor: AppColors.green_500,
+                      fontWeight: FontWeight.w500,
                       fontSize: 16),
                 ),
-              ),
-              24.h,
-              MyElevatedButton(
-                expanded: true,
-                radius: 12,
-                onTap: () {
-                  navigator.pushNamed(RouteList.addTrip);
-                },
-                primaryColor: AppColors.green_500,
-                child: state.isLoading
-                    ? const Center(
-                        child: Loader(
-                          color: AppColors.white,
-                        ),
-                      )
-                    : const TextWidget(
-                        text: "Log In",
-                        textColor: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16),
-              ),
-              20.h,
-              MyElevatedButton(
-                expanded: true,
-                radius: 12,
-                elevation: 0,
-                onTap: () {
-                  context
-                      .read<AuthBloc>()
-                      .add(const CurrentPageChangedEvent(page: 1));
-                },
-                primaryColor: Colors.white,
-                borderColor: AppColors.green_500,
-                child: const TextWidget(
-                    text: "Register",
-                    textColor: AppColors.green_500,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

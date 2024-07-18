@@ -1,5 +1,5 @@
 part of "api_client_impl.dart";
 
 abstract class ApiClient {
-  Future<bool?> login(String number);
+  Future<bool?> register(String email, String password);
 }

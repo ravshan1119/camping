@@ -1,3 +1,8 @@
+import 'package:camping/core/route/navigator.dart';
+import 'package:camping/core/route/routes.dart';
+import 'package:camping/core/route/routes_const.dart';
+import 'package:camping/data/injection.dart';
+import 'package:camping/domain/api_client_impl.dart';
 import 'package:camping/screens/auth/models/login_model.dart';
 import 'package:camping/screens/auth/models/register_model.dart';
 import 'package:equatable/equatable.dart';
@@ -11,7 +16,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RegisterChangedEvent>(_registerChanged);
     on<LoginChangedEvent>(_loginChanged);
     on<CurrentPageChangedEvent>(_currentPageChanged);
+    on<RegisterEvent>(_register);
+    on<LoginEvent>(_login);
   }
+
+  final _apiClient = getIt<ApiClientImpl>();
 
   void _registerChanged(RegisterChangedEvent event, Emitter<AuthState> emit) {
     emit(
@@ -41,4 +50,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       CurrentPageChangedEvent event, Emitter<AuthState> emit) {
     emit(state.copyWith(currentPage: event.page));
   }
+
+  void _register(RegisterEvent event, Emitter<AuthState> emit) {
+    emit(state.copyWith(isLoading: true));
+    _apiClient
+        .register(
+      state.registerModel?.email ?? '',
+      state.registerModel?.password ?? '',
+    )
+        .then((value) {
+      if (value == true) {
+        navigator.pushReplacementNamed(RouteList.addTrip);
+      }
+    });
+    emit(state.copyWith(isLoading: false));
+  }
+
+  void _login(LoginEvent event, Emitter<AuthState> emit) {}
 }

@@ -35,3 +35,11 @@ class CurrentPageChangedEvent extends AuthEvent {
     required this.page,
   });
 }
+
+class RegisterEvent extends AuthEvent {
+  const RegisterEvent();
+}
+
+class LoginEvent extends AuthEvent {
+  const LoginEvent();
+}
