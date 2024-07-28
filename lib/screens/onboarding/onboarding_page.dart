@@ -1,5 +1,6 @@
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
+import 'package:camping/core/app_images.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/core/route/navigator.dart';
 import 'package:camping/core/route/routes_const.dart';
@@ -30,25 +31,25 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   final List<Widget> _pages = <Widget>[
     const PageViewCard(
-      imagePath: AppIcons.onboarding_1,
+      imagePath: AppImages.onboarding_1,
       text: "Your Tasks",
       description:
           "I always reminds you about your planned activities. which is always my priority and your importance.",
     ),
     const PageViewCard(
-      imagePath: AppIcons.onboarding_2,
+      imagePath: AppImages.onboarding_2,
       text: "Capture Your Memories",
       description:
           "We know that catching photos are necessary in your trip. that’s why we have built-in camera and gallery feature.",
     ),
     const PageViewCard(
-      imagePath: AppIcons.onboarding_3,
+      imagePath: AppImages.onboarding_3,
       text: "Track Your Fitness",
       description:
           "Fitness is one of the main thing which is really inportant to your body and we track it in every second.",
     ),
     const PageViewCard(
-      imagePath: AppIcons.onboarding_4,
+      imagePath: AppImages.onboarding_4,
       text: "There Is Much More",
       description:
           "We have bunch of other cool features. which is super helpful for your next camping trip. so what are you waiting for?",

@@ -29,6 +29,7 @@ dependencies:
       url: https://github.com/Azamat0411/alice.git
   connectivity_plus: ^5.0.2
   firebase_auth: ^4.19.6
+  flutter_advanced_drawer: ^1.3.6
 
 dev_dependencies:
   hive_generator:
@@ -42,7 +43,31 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/icons/
+    - assets/font/
     - assets/svg/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/font/Montserrat-Black.ttf
+        - asset: assets/font/Montserrat-BlackItalic.ttf
+        - asset: assets/font/Montserrat-Bold.ttf
+        - asset: assets/font/Montserrat-BoldItalic.ttf
+        - asset: assets/font/Montserrat-ExtraBold.ttf
+        - asset: assets/font/Montserrat-ExtraBoldItalic.ttf
+        - asset: assets/font/Montserrat-ExtraBoldItalic.ttf
+        - asset: assets/font/Montserrat-ExtraLight.ttf
+        - asset: assets/font/Montserrat-ExtraLightItalic.ttf
+        - asset: assets/font/Montserrat-Italic.ttf
+        - asset: assets/font/Montserrat-Light.ttf
+        - asset: assets/font/Montserrat-LightItalic.ttf
+        - asset: assets/font/Montserrat-Medium.ttf
+        - asset: assets/font/Montserrat-MediumItalic.ttf
+        - asset: assets/font/Montserrat-Regular.ttf
+        - asset: assets/font/Montserrat-SemiBold.ttf
+        - asset: assets/font/Montserrat-SemiBoldItalic.ttf
+        - asset: assets/font/Montserrat-Thin.ttf
+        - asset: assets/font/Montserrat-ThinItalic.ttf
+
 
 

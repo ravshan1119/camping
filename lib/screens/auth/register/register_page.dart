@@ -1,5 +1,6 @@
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
+import 'package:camping/core/app_images.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/screens/auth/bloc/auth_bloc.dart';
 import 'package:camping/screens/common/loader.dart';
@@ -38,27 +39,27 @@ class _RegisterPageState extends State<RegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   100.h,
-                  Image.asset(AppIcons.logo2),
+                  Image.asset(AppImages.logo2),
                   40.h,
-                  const TextWidget(
-                      text: "Name",
-                      textColor: AppColors.grey_500,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16),
-                  8.h,
-                  MyTextFormField(
-                    fillColor: AppColors.grey_50,
-                    radius: 12,
-                    textInputType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    controller: _nameController,
-                    onChanged: (v) {
-                      context
-                          .read<AuthBloc>()
-                          .add(RegisterChangedEvent(name: v));
-                    },
-                  ),
-                  20.h,
+                  // const TextWidget(
+                  //     text: "Name",
+                  //     textColor: AppColors.grey_500,
+                  //     fontWeight: FontWeight.w400,
+                  //     fontSize: 16),
+                  // 8.h,
+                  // MyTextFormField(
+                  //   fillColor: AppColors.grey_50,
+                  //   radius: 12,
+                  //   textInputType: TextInputType.name,
+                  //   textInputAction: TextInputAction.next,
+                  //   controller: _nameController,
+                  //   onChanged: (v) {
+                  //     context
+                  //         .read<AuthBloc>()
+                  //         .add(RegisterChangedEvent(name: v));
+                  //   },
+                  // ),
+                  // 20.h,
                   const TextWidget(
                       text: "Email",
                       textColor: AppColors.grey_500,
@@ -79,25 +80,25 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                   ),
                   20.h,
-                  const TextWidget(
-                      text: "Phone",
-                      textColor: AppColors.grey_500,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16),
-                  8.h,
-                  MyTextFormField(
-                    fillColor: AppColors.grey_50,
-                    radius: 12,
-                    textInputType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
-                    controller: _phoneController,
-                    onChanged: (v) {
-                      context
-                          .read<AuthBloc>()
-                          .add(RegisterChangedEvent(phone: v));
-                    },
-                  ),
-                  20.h,
+                  // const TextWidget(
+                  //     text: "Phone",
+                  //     textColor: AppColors.grey_500,
+                  //     fontWeight: FontWeight.w400,
+                  //     fontSize: 16),
+                  // 8.h,
+                  // MyTextFormField(
+                  //   fillColor: AppColors.grey_50,
+                  //   radius: 12,
+                  //   textInputType: TextInputType.phone,
+                  //   textInputAction: TextInputAction.next,
+                  //   controller: _phoneController,
+                  //   onChanged: (v) {
+                  //     context
+                  //         .read<AuthBloc>()
+                  //         .add(RegisterChangedEvent(phone: v));
+                  //   },
+                  // ),
+                  // 20.h,
                   const TextWidget(
                       text: "Password",
                       textColor: AppColors.grey_500,

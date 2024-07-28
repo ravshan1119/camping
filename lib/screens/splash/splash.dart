@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
+import 'package:camping/core/app_images.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/core/route/routes_const.dart';
 import 'package:camping/data/injection.dart';
@@ -45,7 +46,7 @@ class _SplashPageState extends State<SplashPage> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
-              child: Image.asset(AppIcons.logo),
+              child: Image.asset(AppImages.logo),
             ),
             8.h,
             const Padding(

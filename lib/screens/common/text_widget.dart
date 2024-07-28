@@ -9,7 +9,8 @@ class TextWidget extends StatelessWidget {
     required this.fontSize,
     this.overFlow,
     this.textAlign,
-    this.maxLines
+    this.maxLines,
+    this.fontFamily,
   }) : super(key: key);
   final TextOverflow? overFlow;
   final String? text;
@@ -18,15 +19,17 @@ class TextWidget extends StatelessWidget {
   final double fontSize;
   final TextAlign? textAlign;
   final int? maxLines;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text??'',
+      text ?? '',
       overflow: overFlow,
       textAlign: textAlign,
       maxLines: maxLines,
       style: TextStyle(
+          fontFamily: fontFamily ?? 'Montserrat',
           color: textColor,
           fontWeight: fontWeight,
           fontSize: fontSize),

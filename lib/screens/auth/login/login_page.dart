@@ -1,5 +1,6 @@
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
+import 'package:camping/core/app_images.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/core/route/navigator.dart';
 import 'package:camping/core/route/routes_const.dart';
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 100.h,
-                Image.asset(AppIcons.logo2),
+                Image.asset(AppImages.logo2),
                 40.h,
                 const TextWidget(
                     text: "Email",
