@@ -29,7 +29,10 @@ class MyTextFormField extends StatelessWidget {
     this.fillColor,
     this.contentPadding,
     this.textAlign,
-    this.error, this.suffixConstraints,
+    this.error,
+    this.suffixConstraints,
+    this.cursorColor,
+    this.borderColor,
   });
 
   final TextEditingController? controller;
@@ -58,10 +61,13 @@ class MyTextFormField extends StatelessWidget {
   final bool? autoFocus;
   final String? error;
   final BoxConstraints? suffixConstraints;
+  final Color? cursorColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: cursorColor ?? AppColors.green_500,
       controller: controller,
       focusNode: focusNode,
       onFieldSubmitted: onSubmit,
@@ -85,14 +91,14 @@ class MyTextFormField extends StatelessWidget {
         contentPadding: contentPadding,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius),
-          borderSide: const BorderSide(
-            color: primaryColor,
+          borderSide: BorderSide(
+            color: borderColor ?? AppColors.green_500,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius),
-          borderSide: const BorderSide(color: AppColors.grey_400, width: 1.5),
+          borderSide: const BorderSide(color: AppColors.grey_100, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radius),
