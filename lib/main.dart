@@ -5,6 +5,7 @@ import 'package:camping/core/route/routes_const.dart';
 import 'package:camping/core/theme.dart';
 import 'package:camping/data/hive_storage/hive_db.dart';
 import 'package:camping/data/injection.dart';
+import 'package:camping/screens/add_trip/bloc/add_trip_bloc.dart';
 import 'package:camping/screens/auth/bloc/auth_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => AuthBloc()),
+        BlocProvider(create: (_) => AddTripBloc()),
       ],
       child: MaterialApp(
         title: 'Camping',

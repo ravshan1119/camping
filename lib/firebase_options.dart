@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'camping-9b195.appspot.com',
     iosBundleId: 'com.example.camping',
   );
+
 }

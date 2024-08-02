@@ -4,14 +4,11 @@ import 'package:camping/core/constants.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/core/route/navigator.dart';
 import 'package:camping/core/route/routes_const.dart';
-import 'package:camping/data/injection.dart';
-import 'package:camping/data/local_storage.dart';
 import 'package:camping/screens/add_trip/widget/drawer.dart';
 import 'package:camping/screens/add_trip/widget/empty_page.dart';
 import 'package:camping/screens/add_trip/widget/your_id.dart';
 import 'package:camping/screens/common/my_elevated_button.dart';
 import 'package:camping/screens/common/text_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,15 +32,7 @@ class _AddTripPageState extends State<AddTripPage> {
   Widget build(BuildContext context) {
     return AdvancedDrawer(
       backdrop: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [AppColors.green_700],
-          ),
-        ),
+        decoration: const BoxDecoration(),
       ),
       backdropColor: AppColors.green_700,
       controller: _advancedDrawerController,
@@ -125,7 +114,9 @@ class _AddTripPageState extends State<AddTripPage> {
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(left: 30),
           child: MyElevatedButton(
-              onTap: () {},
+              onTap: () {
+                navigator.pushNamed(RouteList.addTripStart);
+              },
               expanded: true,
               primaryColor: AppColors.green_500,
               child: const TextWidget(
@@ -138,5 +129,3 @@ class _AddTripPageState extends State<AddTripPage> {
     );
   }
 }
-
-

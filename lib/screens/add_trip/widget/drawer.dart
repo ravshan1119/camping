@@ -96,12 +96,16 @@ class DrawerItem extends StatelessWidget {
                     title: const Text('How To use'),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      navigator.pushNamed(RouteList.language);
+                    },
                     leading: SvgPicture.asset(AppIcons.language),
                     title: const Text('Language'),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      navigator.pushNamed(RouteList.logOut);
+                    },
                     leading: SvgPicture.asset(AppIcons.logout),
                     title: const Text('Log-out'),
                   ),

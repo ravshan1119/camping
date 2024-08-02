@@ -1,10 +1,11 @@
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
 import 'package:camping/core/extension.dart';
+import 'package:camping/screens/common/loader.dart';
 import 'package:camping/screens/common/text_widget.dart';
 import 'package:camping/screens/how_to_use/widget/how_to_use_item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HowToUsePage extends StatefulWidget {
@@ -15,12 +16,8 @@ class HowToUsePage extends StatefulWidget {
 }
 
 class _HowToUsePageState extends State<HowToUsePage> {
-  final _advancedDrawerController = AdvancedDrawerController();
-  void _handleMenuButtonPressed() {
-    // NOTICE: Manage Advanced Drawer state through the Controller.
-    // _advancedDrawerController.value = AdvancedDrawerValue.visible();
-    _advancedDrawerController.showDrawer();
-  }
+  final Stream<QuerySnapshot> _howToUse =
+      FirebaseFirestore.instance.collection('how_to_use').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -48,19 +45,33 @@ class _HowToUsePageState extends State<HowToUsePage> {
           fontSize: 20,
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        children: [
-          20.h,
-          ...List.generate(
-            5,
-            (index) => HowToUseItem(
-                title: "Make a Trip",
-                description:
-                    "By pressing “start new trip” button you’ll be able to make fill a form which will help you to set up your",
-                index: index + 1),
-          ),
-        ],
+      body: StreamBuilder(
+        stream: _howToUse,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: Loader(),
+            );
+          }
+          if (snapshot.hasError) {
+            print("Snapshot error: ${snapshot.error}");
+            return const Text('Something went wrong');
+          }
+          return ListView(
+            children:
+                snapshot.data!.docs.reversed.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
+              return Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                child: HowToUseItem(
+                    title: data['title'],
+                    description: data['description'],
+                    index: data['index']),
+              );
+            }).toList(),
+          );
+        },
       ),
     );
   }

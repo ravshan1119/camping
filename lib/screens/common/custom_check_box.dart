@@ -22,8 +22,7 @@ class CustomCheckbox extends StatefulWidget {
     this.autofocus = false,
     this.shape,
     this.side,
-  })  :
-        assert(tristate || value != null);
+  }) : assert(tristate || value != null);
 
   final bool? value;
 
@@ -248,7 +247,7 @@ class _CheckboxState extends State<CustomCheckbox>
           ..shape = widget.shape ??
               checkboxTheme.shape ??
               const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(1.0)),
+                borderRadius: BorderRadius.all(Radius.circular(6.0)),
               )
           ..side =
               _resolveSide(widget.side) ?? _resolveSide(checkboxTheme.side),
@@ -490,9 +489,11 @@ class _CustomRectCheckBoxState extends State<CustomRectCheckBox>
             width: 24,
             height: 24,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                    color: _controller.value == 0 ? AppColors.green_500 : primaryColor,
+                    color: _controller.value == 0
+                        ? AppColors.green_500
+                        : primaryColor,
                     width: 2)),
             child: Center(
               child: AnimatedBuilder(
@@ -503,8 +504,9 @@ class _CustomRectCheckBoxState extends State<CustomRectCheckBox>
                           width: 14,
                           height: 14,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: primaryColor.withOpacity(_controller.value)),
+                              borderRadius: BorderRadius.circular(16),
+                              color:
+                                  primaryColor.withOpacity(_controller.value)),
                         )
                       : const SizedBox();
                 },
