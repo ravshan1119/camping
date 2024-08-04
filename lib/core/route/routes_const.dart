@@ -13,4 +13,5 @@ class RouteList {
   static const String language = '/language';
   static const String addTripStart = '/add_trip_start';
   static const String addTripLocation = '/add_trip_location';
+  static const String addTripLocationView = '/add_trip_location_view';
 }

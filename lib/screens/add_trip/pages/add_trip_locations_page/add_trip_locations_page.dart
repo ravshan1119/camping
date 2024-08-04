@@ -1,13 +1,15 @@
 import 'package:camping/core/app_colors.dart';
 import 'package:camping/core/app_icons.dart';
 import 'package:camping/core/app_images.dart';
-import 'package:camping/core/constants.dart';
 import 'package:camping/core/extension.dart';
-import 'package:camping/screens/common/text_form_field_widget.dart';
+import 'package:camping/core/route/navigator.dart';
+import 'package:camping/core/route/routes_const.dart';
+import 'package:camping/screens/add_trip/pages/add_trip_location_search_page/add_trip_lcoation_search_page.dart';
 import 'package:camping/screens/common/text_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AddTripLocationsPage extends StatefulWidget {
   const AddTripLocationsPage({super.key});
@@ -18,11 +20,11 @@ class AddTripLocationsPage extends StatefulWidget {
 
 class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
   final _carouselController = CarouselController();
-  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
         elevation: 0,
         leading: IconButton(
           splashRadius: 28,
@@ -41,20 +43,49 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
       ),
       body: Column(
         children: [
-          40.h,
+          20.h,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
                 Flexible(
-                  child: MyTextFormField(
-                    fillColor: AppColors.grey_50,
-                    radius: 12,
-                    textInputType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                    controller: _searchController,
-                    hintText: 'Search',
-                    onChanged: (v) {},
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppColors.grey_50,
+                      border: Border.all(
+                        color: AppColors.grey_100,
+                      ),
+                    ),
+                    child: Material(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: const AddTripLocationSearchPage()));
+                        },
+                        borderRadius: BorderRadius.circular(12),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            children: [
+                              TextWidget(
+                                textAlign: TextAlign.center,
+                                text: "Search",
+                                textColor: AppColors.grey_400,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 24.w,
@@ -63,9 +94,27 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                     borderRadius: BorderRadius.circular(12),
                     color: AppColors.green_500,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SvgPicture.asset(AppIcons.search),
+                  child: Material(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: const AddTripLocationSearchPage()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: SvgPicture.asset(
+                          AppIcons.search,
+                          height: 24,
+                          width: 24,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -80,7 +129,7 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                     return Stack(
                       children: [
                         Container(
-                          height: 400,
+                          height: MediaQuery.of(context).size.height * 0.45,
                           width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.symmetric(horizontal: 5.0),
                           decoration: BoxDecoration(
@@ -95,10 +144,11 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                           ),
                         ),
                         const Positioned(
-                          left: 52,
-                          right: 52,
+                          left: 10,
+                          right: 10,
                           bottom: 48,
                           child: TextWidget(
+                            textAlign: TextAlign.center,
                             text: "Catalina Island",
                             textColor: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -119,7 +169,10 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                               color: Colors.transparent,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(12),
-                                onTap: () {},
+                                onTap: () {
+                                  navigator
+                                      .pushNamed(RouteList.addTripLocationView);
+                                },
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 12),
                                   child: TextWidget(
@@ -141,7 +194,7 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
               }).toList(),
               options: CarouselOptions(
                 onScrolled: (value) {},
-                height: 422,
+                height: MediaQuery.of(context).size.height * 0.45 + 22,
                 aspectRatio: 16 / 9,
                 viewportFraction: 0.7,
                 initialPage: 0,
@@ -153,16 +206,22 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enlargeCenterPage: true,
                 enlargeFactor: 0.3,
-                onPageChanged: (index, reason) {},
+                onPageChanged: (index, reason) {
+                  _carouselController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn,
+                  );
+                },
                 scrollDirection: Axis.horizontal,
               )),
-          56.h,
+          30.h,
           const Center(
             child: TextWidget(
               text: "Region",
               textColor: Colors.black,
               fontWeight: FontWeight.w600,
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
           16.h,
@@ -175,10 +234,11 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                       children: [
                         Center(
                           child: TextWidget(
+                            textAlign: TextAlign.center,
                             text: "North America",
                             textColor: Colors.black,
                             fontWeight: FontWeight.w700,
-                            fontSize: 32,
+                            fontSize: 28,
                           ),
                         ),
                       ],
@@ -187,6 +247,9 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                 );
               }).toList(),
               options: CarouselOptions(
+                scrollPhysics:
+                    const ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+                onScrolled: (value) {},
                 height: 40,
                 aspectRatio: 16 / 9,
                 viewportFraction: 0.7,
@@ -199,7 +262,13 @@ class _AddTripLocationsPageState extends State<AddTripLocationsPage> {
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enlargeCenterPage: true,
                 enlargeFactor: 0.3,
-                onPageChanged: (index, reason) {},
+                onPageChanged: (index, reason) {
+                  _carouselController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn,
+                  );
+                },
                 scrollDirection: Axis.horizontal,
               )),
         ],

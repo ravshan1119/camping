@@ -1,4 +1,5 @@
 import 'package:camping/screens/add_trip/add_trip_page.dart';
+import 'package:camping/screens/add_trip/pages/add_trip_location_view/add_trip_location_view.dart';
 import 'package:camping/screens/add_trip/pages/add_trip_locations_page/add_trip_locations_page.dart';
 import 'package:camping/screens/add_trip/pages/add_trip_start_page/add_trip_start_page.dart';
 import 'package:camping/screens/auth/auth_page.dart';
@@ -27,5 +28,6 @@ class Routes {
         RouteList.language: (context) => const LanguagePage(),
         RouteList.addTripStart: (context) => const AddTripStartPage(),
         RouteList.addTripLocation: (context) => const AddTripLocationsPage(),
+        RouteList.addTripLocationView: (context) => const AddTripLocationView(),
       };
 }

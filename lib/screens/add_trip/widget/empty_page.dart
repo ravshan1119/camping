@@ -9,8 +9,9 @@ class EmptyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        150.h,
         Image.asset(AppImages.addTrip, height: 180),
         10.h,
         const TextWidget(

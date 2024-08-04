@@ -42,11 +42,16 @@ class NotificationItem extends StatelessWidget {
                   fontSize: 16,
                 ),
                 8.h,
-                TextWidget(
-                  text: notification.description ?? '',
-                  textColor: AppColors.green_700,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: TextWidget(
+                    maxLines: 2,
+                    overFlow: TextOverflow.ellipsis,
+                    text: notification.description ?? '',
+                    textColor: AppColors.green_700,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
                 ),
               ],
             )

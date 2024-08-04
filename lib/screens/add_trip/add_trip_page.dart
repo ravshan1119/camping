@@ -107,6 +107,7 @@ class _AddTripPageState extends State<AddTripPage> {
                   id: "CMP21992822",
                 ),
               ),
+              50.h,
               const EmptyPage()
             ],
           ),

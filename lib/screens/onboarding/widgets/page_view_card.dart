@@ -4,7 +4,11 @@ import 'package:camping/screens/common/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class PageViewCard extends StatelessWidget {
-  const PageViewCard({super.key, required this.imagePath, required this.text, required this.description});
+  const PageViewCard(
+      {super.key,
+      required this.imagePath,
+      required this.text,
+      required this.description});
 
   final String imagePath;
 
@@ -24,6 +28,7 @@ class PageViewCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 40),
           child: TextWidget(
+            maxLines: 1,
             text: text,
             textAlign: TextAlign.center,
             textColor: AppColors.black,
@@ -35,6 +40,7 @@ class PageViewCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextWidget(
+            maxLines: 3,
             text: description,
             textAlign: TextAlign.center,
             textColor: AppColors.grey_700,
