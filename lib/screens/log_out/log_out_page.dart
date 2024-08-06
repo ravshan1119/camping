@@ -70,7 +70,7 @@ class _LogOutPageState extends State<LogOutPage> {
                   showAdaptiveDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
+                      return AlertDialog.adaptive(
                         content:
                             const Text("Are you sure you want to log out?"),
                         actions: [

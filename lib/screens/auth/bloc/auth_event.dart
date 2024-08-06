@@ -12,19 +12,21 @@ class RegisterChangedEvent extends AuthEvent {
   final String? password;
   final String? name;
   final String? phone;
+  final String? rePassword;
   const RegisterChangedEvent({
     this.email,
     this.password,
     this.name,
     this.phone,
+    this.rePassword,
   });
 }
 
 class LoginChangedEvent extends AuthEvent {
-  final String? email;
+  final String? phone;
   final String? password;
   const LoginChangedEvent({
-    this.email,
+    this.phone,
     this.password,
   });
 }

@@ -1,5 +1,4 @@
 import 'package:camping/core/app_colors.dart';
-import 'package:camping/core/app_icons.dart';
 import 'package:camping/core/app_images.dart';
 import 'package:camping/core/extension.dart';
 import 'package:camping/screens/auth/bloc/auth_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:camping/screens/common/text_form_field_widget.dart';
 import 'package:camping/screens/common/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,15 +22,16 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _passwordAgainController = TextEditingController();
+  var maskFormatter = MaskTextInputFormatter(
+      mask: '(##) ###-##-##',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        _nameController.text = state.registerModel?.name ?? '';
-        _emailController.text = state.registerModel?.email ?? '';
-        _phoneController.text = state.registerModel?.phone ?? '';
-        _passwordController.text = state.registerModel?.password ?? '';
         return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: SingleChildScrollView(
@@ -61,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // ),
                   // 20.h,
                   const TextWidget(
-                      text: "Email",
+                      text: "Phone",
                       textColor: AppColors.grey_500,
                       fontWeight: FontWeight.w400,
                       fontSize: 16),
@@ -71,8 +72,28 @@ class _RegisterPageState extends State<RegisterPage> {
                     radius: 12,
                     textInputType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    controller: _emailController,
+                    controller: _phoneController,
                     error: state.errorEmail,
+                    inputFormatter: [maskFormatter],
+                    style: const TextStyle(
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.only(
+                          left: 20, bottom: 11, top: 11, right: 5),
+                      child: Text(
+                        "+998 ",
+                        style: TextStyle(
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                     onChanged: (v) {
                       context
                           .read<AuthBloc>()
@@ -117,6 +138,27 @@ class _RegisterPageState extends State<RegisterPage> {
                       context
                           .read<AuthBloc>()
                           .add(RegisterChangedEvent(password: v));
+                    },
+                  ),
+                  24.h,
+                  const TextWidget(
+                      text: "Confirm Password",
+                      textColor: AppColors.grey_500,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16),
+                  8.h,
+                  MyTextFormField(
+                    fillColor: AppColors.grey_50,
+                    radius: 12,
+                    textInputType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    obscureText: true,
+                    controller: _passwordAgainController,
+                    error: state.errorPassword,
+                    onChanged: (v) {
+                      context
+                          .read<AuthBloc>()
+                          .add(RegisterChangedEvent(rePassword: v));
                     },
                   ),
                   24.h,

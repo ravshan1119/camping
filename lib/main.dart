@@ -7,7 +7,9 @@ import 'package:camping/data/hive_storage/hive_db.dart';
 import 'package:camping/data/injection.dart';
 import 'package:camping/screens/add_trip/bloc/add_trip_bloc.dart';
 import 'package:camping/screens/auth/bloc/auth_bloc.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +25,12 @@ void main() async {
   await Firebase.initializeApp();
   await hiveInit();
   await getItInit();
-  runApp(const MainApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -37,14 +44,17 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => AddTripBloc()),
       ],
       child: MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         title: 'Camping',
         theme: themeData,
         navigatorKey: NavigationService.navigatorKey,
         initialRoute: RouteList.splash,
         debugShowCheckedModeBanner: false,
-        builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
-            child: child ?? Container()),
+        // builder: (context, child) => MediaQuery(
+        //     data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+        //     child: child ?? Container()),
         onGenerateRoute: (RouteSettings settings) {
           final routes = Routes.getRoutes(settings);
           final WidgetBuilder builder = routes[settings.name]!;

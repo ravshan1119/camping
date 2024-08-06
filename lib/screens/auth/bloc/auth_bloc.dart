@@ -32,6 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: event.password ?? state.registerModel?.password ?? '',
           name: event.name ?? state.registerModel?.name ?? '',
           phone: event.phone ?? state.registerModel?.phone ?? '',
+          rePassword: event.rePassword ?? state.registerModel?.rePassword ?? '',
         ),
       ),
     );
@@ -43,7 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         errorEmail: null,
         errorPassword: null,
         loginModel: LoginModel(
-          email: event.email ?? state.loginModel?.email ?? '',
+          phone: event.phone ?? state.loginModel?.phone ?? '',
           password: event.password ?? state.loginModel?.password ?? '',
         ),
       ),
@@ -56,31 +57,36 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _register(RegisterEvent event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(isLoading: true));
-    await _apiClient
-        .register(
-      state.registerModel?.email ?? '',
-      state.registerModel?.password ?? '',
-    )
-        .then((value) {
-      print("valueeeeee error: ${value.errorEmail}");
-      if (value.isRegister == true) {
-        emit(state.copyWith(isLoading: false));
-        navigator.pushReplacementNamed(RouteList.addTrip);
-      } else {
-        emit(state.copyWith(
-            errorEmail: value.errorEmail,
-            isLoading: false,
-            errorPassword: value.errorPassword));
-      }
-    });
+    if (state.registerModel?.rePassword == state.registerModel?.password) {
+      emit(state.copyWith(isLoading: true));
+      await _apiClient
+          .register(
+        '998${state.registerModel?.email.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "").replaceAll("-", "")}@gmail.com',
+        state.registerModel?.password ?? '',
+      )
+          .then((value) {
+        print("valueeeeee error: ${value.errorEmail}");
+        if (value.isRegister == true) {
+          emit(state.copyWith(isLoading: false));
+          navigator.pushReplacementNamed(RouteList.addTrip);
+        } else {
+          emit(state.copyWith(
+              errorEmail: value.errorEmail,
+              isLoading: false,
+              errorPassword: value.errorPassword));
+        }
+      });
+    } else {
+      emit(state.copyWith(errorPassword: "Password does not match"));
+    }
   }
 
   void _login(LoginEvent event, Emitter<AuthState> emit) async {
     emit(state.copyWith(isLoading: true));
     await _apiClient
         .login(
-      state.loginModel?.email ?? '',
+      '998${state.loginModel?.phone.replaceAll(" ", "").replaceAll("(", "").replaceAll(")", "").replaceAll("-", "")}@gmail.com' ??
+          '',
       state.loginModel?.password ?? '',
     )
         .then((value) {

@@ -6,6 +6,7 @@ import 'package:camping/screens/add_trip/bloc/add_trip_bloc.dart';
 import 'package:camping/screens/common/my_elevated_button.dart';
 import 'package:camping/screens/common/text_form_field_widget.dart';
 import 'package:camping/screens/common/text_widget.dart';
+import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,11 @@ class AddTripStartPage extends StatefulWidget {
 
 class _AddTripStartPageState extends State<AddTripStartPage> {
   final _tripNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +182,10 @@ class _AddTripStartPageState extends State<AddTripStartPage> {
                           color: Colors.transparent,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12),
-                            onTap: () {},
+                            onTap: () {
+                              navigator
+                                  .pushNamed(RouteList.addTripAddTeammates);
+                            },
                             child: const Center(
                               child: TextWidget(
                                 text: "+",
@@ -205,7 +214,10 @@ class _AddTripStartPageState extends State<AddTripStartPage> {
                           color: Colors.transparent,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12),
-                            onTap: () {},
+                            onTap: () {
+                              navigator
+                                  .pushNamed(RouteList.addTripAddTeammates);
+                            },
                             child: const Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 18, horizontal: 16),
@@ -234,7 +246,9 @@ class _AddTripStartPageState extends State<AddTripStartPage> {
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12),
-                        onTap: () {},
+                        onTap: () {
+                          _showDatePicker(context);
+                        },
                         child: const Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 18, horizontal: 16),
@@ -274,4 +288,23 @@ class _AddTripStartPageState extends State<AddTripStartPage> {
       ),
     );
   }
+}
+
+void _showDatePicker(BuildContext context) {
+  showCrDatePicker(
+    context,
+    properties: DatePickerProperties(
+      onDateRangeSelected: (rangeBegin, rangeEnd) {},
+      firstWeekDay: WeekDay.monday,
+      okButtonBuilder: (onPress) => ElevatedButton(
+        child: const Text('OK'),
+        onPressed: () {},
+      ),
+      cancelButtonBuilder: (onPress) => OutlinedButton(
+        child: const Text('CANCEL'),
+        onPressed: () {},
+      ),
+      initialPickerDate: DateTime.now(),
+    ),
+  );
 }

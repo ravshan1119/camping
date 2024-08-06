@@ -14,6 +14,7 @@ Widget adaptiveAction(
       return TextButton(onPressed: onPressed, child: child);
     case TargetPlatform.iOS:
     case TargetPlatform.macOS:
+      print("salom");
       return CupertinoDialogAction(onPressed: onPressed, child: child);
   }
 }
